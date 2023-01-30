@@ -2,7 +2,7 @@ import time
 
 class Battery:
     def __init__(self, energy):
-        self.energy = energy
+        self.energy = min(max(0, energy), 50)
 
     def get_energy_level(self):
         return self.energy
