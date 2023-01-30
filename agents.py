@@ -1,10 +1,12 @@
 import random
 import math
+import battery.py
 
 class Agent:
-    def __init__(self, speed, battery, cargo_capacity):
+    #créeation d'une classe agent
+    def __init__(self, speed, Battery, cargo_capacity):
         self.speed = speed
-        self.battery = battery
+        self.Battery = Battery
         self.cargo_capacity = cargo_capacity
         self.position = (0, 0)
     
@@ -19,7 +21,7 @@ class Agent:
             self.position = (self.position[0], self.position[1] - self.speed)
         elif direction == "W":
             self.position = (self.position[0] - self.speed, self.position[1])
-        self.battery -= 1
+        
     
     def move_a_star(self, target):
         # implémentation de l'algorithme A* pour trouver le chemin le plus court vers la cible
@@ -29,4 +31,4 @@ class Agent:
         # déplacement en suivant un trajet mémorisé
         if len(path) > 0:
             self.position = path.pop(0)
-            self.battery -= 1
+            
