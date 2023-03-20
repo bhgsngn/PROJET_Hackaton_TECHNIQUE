@@ -1,6 +1,6 @@
 import random
 import math
-
+import battery
 
 class Agent:
     def __init__(self, speed, battery, cargo_capacity):
