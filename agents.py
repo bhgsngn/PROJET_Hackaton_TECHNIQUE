@@ -1,8 +1,6 @@
 import random
 import math
-
-import random
-import math
+import battery
 import color_detector
 
 
