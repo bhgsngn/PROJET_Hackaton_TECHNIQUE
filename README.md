@@ -1,3 +1,5 @@
 # PROJET_Hackaton_TECHNIQUE
 
-git add README.md
+calcul de distance 
+affichage de la carte 
+la logique overall
