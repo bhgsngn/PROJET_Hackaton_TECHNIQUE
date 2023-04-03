@@ -1,11 +1,13 @@
 import random
 import math
-
+import battery
+import color_detector
 
 class Agent:
-    def __init__(self, speed, battery, cargo_capacity):
+#créeation d'une classe agent
+    def __init__(self, speed, Battery, cargo_capacity):
         self.speed = speed
-        self.battery = battery
+        self.Battery = Battery
         self.cargo_capacity = cargo_capacity
         self.position = (0, 0)
         self.closed_list = []
@@ -83,4 +85,4 @@ class Agent:
         # déplacement en suivant un trajet mémorisé
         if len(path) > 0:
             self.position = path.pop(0)
-            self.battery -= 1
+            self.Battery -= 1
