@@ -23,7 +23,7 @@ class Agent:
             self.position = (self.position[0], self.position[1] - self.speed)
         elif direction == "W":
             self.position = (self.position[0] - self.speed, self.position[1])
-        self.battery -= 1
+        self.Battery -= 1
 
     def move_a_star(self, target):
         # Initialiser la liste des cases ouvertes avec la case de départ
