@@ -1,34 +1,42 @@
-pip install opencv-python
-pip install numpy
-
 import cv2
 import numpy as np
 import sys
+import concurrent.futures
+import os
 
+# Obtenez le chemin absolu du répertoire courant
+current_dir = os.path.abspath(os.path.dirname(__file__))
 
+# Nom du fichier image
+image_file = "Hackathontech.png"
 
-img = cv2.imread("C:/Users/Marien/OneDrive - De Vinci/Images/Hackathon_tech.png")
+# Chemin complet de l'image
+image_path = os.path.join(current_dir, image_file)
+
+# Chargez l'image
+img = cv2.imread(image_path)
+
+# Afficher la forme de l'image
 print(img.shape)
 
 
-img = cv2.imread("C:/Users/Marien/OneDrive - De Vinci/Images/Hackathon_tech.png")
-rows, cols, _ = img.shape
-for i in range(rows):
-    for j in range(cols):
-        (b, g, r) = img[i, j]
-        print("Pixel at (", i, ",", j, ") - Red:", r, " Green:", g, " Blue:", b)
-# Draw grid lines on the image
+
 rows, cols, _ = img.shape
 
-# Draw vertical lines
-for i in range(cols):
-    if i % 10 == 0: # draw a line every 10 pixels
-        cv2.line(img, (i, 0), (i, rows), (0, 0, 0), 1)
+def draw_vertical_lines(img, start, end, step):
+    for i in range(start, end):
+        if i % step == 0:
+            cv2.line(img, (i, 0), (i, rows), (0, 0, 0), 1)
 
-# Draw horizontal lines
-for i in range(rows):
-    if i % 10 == 0: # draw a line every 10 pixels
-        cv2.line(img, (0, i), (cols, i), (0, 0, 0), 1)
+def draw_horizontal_lines(img, start, end, step):
+    for i in range(start, end):
+        if i % step == 0:
+            cv2.line(img, (0, i), (cols, i), (0, 0, 0), 1)
+
+# Use concurrent.futures to run the two loops in parallel
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    future1 = executor.submit(draw_vertical_lines, img, 0, cols, 10)
+    future2 = executor.submit(draw_horizontal_lines, img, 0, rows, 10)
 
 # Show the image
 cv2.imshow("Image", img)
@@ -36,3 +44,4 @@ cv2.imshow("Image", img)
 # Wait for a key press and then close the window
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
