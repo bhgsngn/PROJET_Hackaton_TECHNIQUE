@@ -1,4 +1,4 @@
-#agents.py
+# agents.py
 
 import random
 import math
@@ -6,16 +6,16 @@ import battery
 import color_detector
 
 class Agent:
-#créeation d'une classe agent
-    def __init__(self, speed, Battery, cargo_capacity):
+    # Création d'une classe agent
+    def __init__(self, speed, battery, cargo_capacity):
         self.speed = speed
-        self.Battery = Battery
+        self.battery = battery
         self.cargo_capacity = cargo_capacity
         self.position = (0, 0)
         self.closed_list = []
 
     def move_random(self):
-        # déplacement aléatoire dans une direction aléatoire
+        # Déplacement aléatoire dans une direction aléatoire
         direction = random.choice(["N", "E", "S", "W"])
         if direction == "N":
             self.position = (self.position[0], self.position[1] + self.speed)
@@ -25,7 +25,7 @@ class Agent:
             self.position = (self.position[0], self.position[1] - self.speed)
         elif direction == "W":
             self.position = (self.position[0] - self.speed, self.position[1])
-        self.Battery -= 1
+        self.battery -= 1
 
     def move_a_star(self, target):
         # Initialiser la liste des cases ouvertes avec la case de départ
@@ -64,7 +64,7 @@ class Agent:
         # Si aucun chemin n'a été trouvé, retourner None
         return None
 
-    def manhattan_distance(a, b):
+    def manhattan_distance(self, a, b):
         # Fonction pour calculer la distance de Manhattan entre deux cases
         return abs(a[0] - b[0]) + abs(a[1] - b[1])
 

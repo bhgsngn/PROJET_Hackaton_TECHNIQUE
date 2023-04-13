@@ -1,5 +1,6 @@
 #map.py
 
+import balise
 import tkinter as tk
 import random
 
@@ -30,7 +31,7 @@ class Grid:
                 # Ajout de carrés jaunes aléatoirement
                 elif random.random() < 0.025 and self.grid[y][x] == 0 and not any(self.grid[i][j] == 2 for i in range(max(0, y-1), min(self.height, y+2)) for j in range(max(0, x-1), min(self.width, x+2))):
                     self.grid[y][x] = 2
-                    self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="yellow")
+                    self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="yellow", tags="balise")
                 # Ajout de carrés gris pour le reste de la grille
                 else:
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="gray")
