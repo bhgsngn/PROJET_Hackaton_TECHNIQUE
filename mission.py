@@ -1,15 +1,16 @@
+#mission.py
+
 import random
 import math
 
 
 class Mission:
-    def init(self, source, target, item_type, quantity):
-
-    self.source = source
-    self.target = target
-    self.item_type = item_type
-    self.quantity = quantity
-    self.status = "En attente"
+    def __init__(self, source, target, item_type, quantity):
+        self.source = source
+        self.target = target
+        self.item_type = item_type
+        self.quantity = quantity
+        self.status = "En attente"
 
     def update_status(self, agent):
         # Fonction pour mettre à jour le statut de la mission
@@ -23,3 +24,4 @@ class Mission:
                 self.status = "Terminée"
                 return True
         return False
+
