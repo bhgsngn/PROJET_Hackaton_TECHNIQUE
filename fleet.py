@@ -1,11 +1,13 @@
+#fleet.py
+
 import random
 import math
 
 class Fleet:
-    def init(self, agents, missions, warehouses):
-    self.agents = agents
-    self.missions = missions
-    self.warehouses = warehouses
+    def __init__(self, agents, missions, warehouses):
+        self.agents = agents
+        self.missions = missions
+        self.warehouses = warehouses
 
     def assign_missions(self):
         # Fonction pour assigner des missions aux agents
