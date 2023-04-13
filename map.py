@@ -10,16 +10,14 @@ class Grid:
         self.canvas = tk.Canvas(window, width=width*square_size, height=height*square_size)
         self.canvas.pack()
         self.draw_grid()
-        self.draw_square(0, 0,"blue") #position et couleur du carré
+        self.draw_square(0, 0, "blue") #position et couleur du carré
+        self.draw_square(15, 15, "red") #position et couleur du carré
         
-
     def draw_square(self, x, y, color):
         x_pixel = x * self.square_size
         y_pixel = y * self.square_size
-        self.canvas.create_rectangle(x_pixel, y_pixel, x_pixel + 2*self.square_size, y_pixel + 2*self.square_size, fill=color)
-        #créee un carré de 2*2
-
-
+        self.canvas.create_rectangle(x_pixel, y_pixel, x_pixel + self.square_size, y_pixel + self.square_size, fill=color)
+    
     def draw_grid(self):
         for y in range(self.height):
             for x in range(self.width):
@@ -28,7 +26,7 @@ class Grid:
                     self.grid[y][x] = 1
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="black")
                 # Ajout de carrés jaunes aléatoirement
-                elif random.random() < 0.025 and self.grid[y][x] == 0:
+                elif random.random() < 0.025 and self.grid[y][x] == 0 and not any(self.grid[i][j] == 2 for i in range(max(0, y-1), min(self.height, y+2)) for j in range(max(0, x-1), min(self.width, x+2))):
                     self.grid[y][x] = 2
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="yellow")
                 # Ajout de carrés gris pour le reste de la grille
@@ -54,4 +52,3 @@ window_height = 700
 root.geometry(f"{window_width}x{window_height}")
 
 root.mainloop()
-
