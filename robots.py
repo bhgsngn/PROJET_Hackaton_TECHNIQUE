@@ -1,3 +1,4 @@
+
 class PurplePoint:
     def __init__(self, grid, blue_square_x, blue_square_y):
         self.grid = grid
@@ -16,11 +17,12 @@ class PurplePoint:
             self.draw()
 
     def draw(self):
-        self.grid.draw_square(self.x, self.y, self.color)
+        self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
+            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill=self.color)
 
     def erase(self):
-        self.grid.draw_square(self.x, self.y, "blue")
-
+        self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
+            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="blue")
 
 class PinkPoint:
     def __init__(self, grid, red_square_x, red_square_y):
@@ -40,7 +42,9 @@ class PinkPoint:
             self.draw()
 
     def draw(self):
-        self.grid.draw_square(self.x, self.y, self.color)
+        self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
+            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill=self.color)
 
     def erase(self):
-        self.grid.draw_square(self.x, self.y, "red")
+        self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
+            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="red")
