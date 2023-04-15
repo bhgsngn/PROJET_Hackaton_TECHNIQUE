@@ -13,8 +13,8 @@ class Grid:
         self.draw_grid()
         self.draw_square(0, 0, "blue") #position et couleur du carré
         self.draw_square(15, 15, "red") #position et couleur du carré
-        self.purple_point = PurplePoint(self, 5, 5)  # create an instance of PurplePoint
-        self.pink_point = PinkPoint(self, 10, 10)  # create an instance of PinkPoint
+        self.purple_point = PurplePoint(self, 0, 0)  # (self, position)
+        self.pink_point = PinkPoint(self, 15, 15)  # 
         
     def draw_square(self, x, y, color):
         x_pixel = x * self.square_size
