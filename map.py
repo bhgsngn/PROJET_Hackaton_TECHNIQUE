@@ -1,8 +1,6 @@
-#map.py
-
-import balise
 import tkinter as tk
 import random
+from robots import PinkPoint, PurplePoint  # import the classes from the points module
 
 class Grid:
     def __init__(self, width, height, square_size, window):
@@ -15,6 +13,8 @@ class Grid:
         self.draw_grid()
         self.draw_square(0, 0, "blue") #position et couleur du carré
         self.draw_square(15, 15, "red") #position et couleur du carré
+        self.purple_point = PurplePoint(self, 5, 5)  # create an instance of PurplePoint
+        self.pink_point = PinkPoint(self, 10, 10)  # create an instance of PinkPoint
         
     def draw_square(self, x, y, color):
         x_pixel = x * self.square_size
@@ -55,3 +55,5 @@ window_height = 700
 root.geometry(f"{window_width}x{window_height}")
 
 root.mainloop()
+
+

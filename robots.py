@@ -1,8 +1,8 @@
 class PurplePoint:
-    def __init__(self, grid, x, y):
+    def __init__(self, grid, blue_square_x, blue_square_y):
         self.grid = grid
-        self.x = x
-        self.y = y
+        self.x = blue_square_x
+        self.y = blue_square_y
         self.color = "purple"
         self.draw()
 
@@ -19,14 +19,14 @@ class PurplePoint:
         self.grid.draw_square(self.x, self.y, self.color)
 
     def erase(self):
-        self.grid.draw_square(self.x, self.y, "gray")
+        self.grid.draw_square(self.x, self.y, "blue")
 
 
 class PinkPoint:
-    def __init__(self, grid, x, y):
+    def __init__(self, grid, red_square_x, red_square_y):
         self.grid = grid
-        self.x = x
-        self.y = y
+        self.x = red_square_x
+        self.y = red_square_y
         self.color = "pink"
         self.draw()
 
@@ -43,4 +43,4 @@ class PinkPoint:
         self.grid.draw_square(self.x, self.y, self.color)
 
     def erase(self):
-        self.grid.draw_square(self.x, self.y, "gray")
+        self.grid.draw_square(self.x, self.y, "red")
