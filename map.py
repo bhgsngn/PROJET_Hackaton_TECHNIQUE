@@ -1,5 +1,3 @@
-
-
 #import#
 import tkinter as tk
 import random
@@ -87,7 +85,6 @@ def generate_grid(width, height, square_size, window):
         canvas.place(y=y_offset)
         
     return grid
-
 
 
 # Example usage with Tkinter
