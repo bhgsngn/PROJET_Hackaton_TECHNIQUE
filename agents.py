@@ -1,21 +1,12 @@
-#agents.py
-
-import random
-import math
-import battery
-import color_detector
-
 class Agent:
-#créeation d'une classe agent
-    def __init__(self, speed, Battery, cargo_capacity):
+    def __init__(self, speed, battery=100, cargo_capacity=10):
         self.speed = speed
-        self.Battery = Battery
+        self.battery = battery
         self.cargo_capacity = cargo_capacity
         self.position = (0, 0)
-        self.closed_list = []
+        self.shape = None
 
     def move_random(self):
-        # déplacement aléatoire dans une direction aléatoire
         direction = random.choice(["N", "E", "S", "W"])
         if direction == "N":
             self.position = (self.position[0], self.position[1] + self.speed)
@@ -25,66 +16,56 @@ class Agent:
             self.position = (self.position[0], self.position[1] - self.speed)
         elif direction == "W":
             self.position = (self.position[0] - self.speed, self.position[1])
-        self.Battery -= 1
+        self.battery -= 1
+
+        # Update agent shape on the grid
+        self.canvas.coords(self.shape, self.position[0]*self.square_size, self.position[1]*self.square_size)
 
     def move_a_star(self, target):
-        # Initialiser la liste des cases ouvertes avec la case de départ
         open_list = [self.position]
-        # Initialiser le dictionnaire des coûts avec la case de départ
-        costs = {self.position: {
-            'g': 0, 'h': self.manhattan_distance(self.position, target)}}
-        # Boucle jusqu'à ce que toutes les cases aient été vues ou que la cible ait été atteinte
+        costs = {self.position: {'g': 0, 'h': self.manhattan_distance(self.position, target)}}
         while open_list:
-            # Trouver la case avec le coût f le plus bas (f = g + h)
-            current = min(
-                open_list, key=lambda x: costs[x]['g'] + costs[x]['h'])
-            # Si c'est la cible, retourner le chemin
+            current = min(open_list, key=lambda x: costs[x]['g'] + costs[x]['h'])
             if current == target:
-                return self.reconstruct_path(target, costs)
-            # Sinon, marquer la case comme fermée
+                return self.reconstruct_path(current, costs)
             open_list.remove(current)
-            self.closed_list.append(current)
-            # Pour chaque case voisine
+            closed_list = [current]
             for neighbor in self.get_neighbors(current):
-                # Si elle est fermée, passer
-                if neighbor in self.closed_list:
+                if neighbor in closed_list:
                     continue
-                # Calculer les nouveaux coûts g et h
-                # On suppose ici que tous les déplacements coûtent 1
                 g = costs[current]['g'] + 1
                 h = self.manhattan_distance(neighbor, target)
-                # Si la case voisine est déjà dans la liste ouverte
                 if neighbor in open_list:
-                    # Si les nouveaux coûts sont plus élevés, passer
                     if costs[neighbor]['g'] <= g:
                         continue
-                # Sinon, ajouter la case voisine à la liste ouverte
                 open_list.append(neighbor)
                 costs[neighbor] = {'g': g, 'h': h}
-        # Si aucun chemin n'a été trouvé, retourner None
         return None
 
-    def manhattan_distance(a, b):
-        # Fonction pour calculer la distance de Manhattan entre deux cases
+    def manhattan_distance(self, a, b):
         return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-    def reconstruct_path(self, target, costs):
-        # Fonction pour reconstruire le chemin à partir du dictionnaire des coûts
-        path = [target]
-        current = target
+    def reconstruct_path(self, current, costs):
+        path = [current]
         while current != self.position:
-            # Trouver la case voisine avec le coût g le plus faible
             neighbors = self.get_neighbors(current)
-            neighbor = min(neighbors, key=lambda x: costs[x]['g'])
-            # Ajouter la case voisine au chemin
-            path.append(neighbor)
-            current = neighbor
-            # Renverser le chemin pour qu'il soit dans l'ordre
-            path.reverse()
+            current = min(neighbors, key=lambda x: costs[x]['g'])
+            path.append(current)
+        path.reverse()
         return path
 
     def move_memorized(self, path):
-        # déplacement en suivant un trajet mémorisé
-        if len(path) > 0:
+        if self.battery > 0 and len(path) > 0:
             self.position = path.pop(0)
-            self.Battery -= 1
+            self.battery -= 1
+
+            # Update agent shape on the grid
+            self.canvas.coords(self.shape, self.position[0]*self.square_size, self.position[1]*self.square_size)
+
+    def draw(self, canvas, square_size):
+        # Create a circle shape for the agent
+        x_pixel = self.position[0] * square_size
+        y_pixel = self.position[1] * square_size
+        self.shape = canvas.create_oval(x_pixel, y_pixel, x_pixel + square_size, y_pixel + square_size, fill="green")
+        self.canvas = canvas
+        self.square_size = square_size
