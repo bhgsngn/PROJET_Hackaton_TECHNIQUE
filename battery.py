@@ -1,5 +1,6 @@
 import time
 
+#
 # Création de la batterie
 class Battery:
     def __init__(self, energy):

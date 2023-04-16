@@ -29,7 +29,7 @@ class PurplePoint:
 
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
-            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="blue")
+            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size,)
         
     def charge_battery(self):
         if self.grid.grid[self.x][self.y] == 2:
@@ -63,7 +63,7 @@ class PinkPoint:
 
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
-            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="red")
+            (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size,)
         
     def charge_battery(self):
         if self.grid.grid[self.x][self.y] == 2:
