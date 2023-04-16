@@ -57,7 +57,7 @@ class Grid:
                 # Ajout de carrés gris pour le reste de la grille
                 else:
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="gray")
-
+        purple_point.move(1,0)
 
 #
 #
