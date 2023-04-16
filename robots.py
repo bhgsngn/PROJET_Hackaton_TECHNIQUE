@@ -2,12 +2,13 @@ from battery import Battery
 import random
 
 class PurplePoint:
-    def __init__(self, grid, x=0, y=0):
+    def __init__(self, grid, blue_square_x, blue_square_y):
         self.grid = grid
         self.battery = Battery(50)
-        self.shape = self.grid.canvas.create_oval(10, 10, 30, 30, fill="purple")
-        self.x = x
-        self.y = y
+        self.color = "purple"
+        self.x = blue_square_x
+        self.y = blue_square_y
+        self.draw()
 
     def move(self, dx, dy):
         self.x += dx
@@ -17,7 +18,7 @@ class PurplePoint:
 
     def draw(self):
         self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
-            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill="purple")
+            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill=self.color)
 
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
@@ -25,23 +26,24 @@ class PurplePoint:
 
 
 class PinkPoint:
-    def __init__(self, grid, x=15, y=15):
+    def __init__(self, grid, red_square_x, red_square_y):
         self.grid = grid
         self.battery = Battery(50)
-        self.shape = self.grid.canvas.create_oval(10, 10, 30, 30, fill="pink")
-        self.x = x
-        self.y = y
-
+        self.color = "pink"
+        self.x = red_square_x
+        self.y = red_square_y
+        self.draw()
+        
     def move(self, dx, dy):
         self.x += dx
         self.y += dy
         self.grid.canvas.move(self.shape, dx*self.grid.square_size, dy*self.grid.square_size)
         self.battery.use_battery(1)
-
+        self.draw()
 
     def draw(self):
         self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
-            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill="pink")
+            (self.x+1) * self.grid.square_size - 2, (self.y+1) * self.grid.square_size - 2, fill=self.color)
 
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
