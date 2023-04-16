@@ -1,11 +1,13 @@
-#prout2.py
 
+#import#
 import tkinter as tk
 import random
 from robots import PinkPoint, PurplePoint  # import the classes from the points module
 from tkinter import ttk
 
 class Grid:
+    #
+    #
     def __init__(self, width, height, square_size, window):
         self.width = width
         self.height = height
@@ -28,12 +30,14 @@ class Grid:
         self.battery_table.insert('', 'end', values=('PinkPoint', PinkPoint(self, 15, 15).battery.get_energy_level()))
         
         self.battery_table.pack(side=tk.RIGHT, padx=10, pady=10)
-        
+    #
+    #     
     def draw_square(self, x, y, color):
         x_pixel = x * self.square_size
         y_pixel = y * self.square_size
         self.canvas.create_rectangle(x_pixel, y_pixel, x_pixel + self.square_size, y_pixel + self.square_size, fill=color)
-    
+    #
+    # 
     def draw_grid(self):
         for y in range(self.height):
             for x in range(self.width):
@@ -55,6 +59,9 @@ class Grid:
                 else:
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="gray")
 
+
+#
+#
 def generate_grid(width, height, square_size, window):
         # Create a canvas with a frame to center the grid
     frame = ttk.Frame(window)

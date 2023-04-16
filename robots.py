@@ -1,6 +1,8 @@
 from battery import Battery
 import random
 
+
+#classe point violet
 class PurplePoint:
     def __init__(self, grid, blue_square_x, blue_square_y):
         self.grid = grid
@@ -33,6 +35,7 @@ class PurplePoint:
             print("Batterie rechargée. Niveau d'énergie actuel :", self.battery.get_energy_level())
 
 
+#classe point rose 
 class PinkPoint:
     def __init__(self, grid, red_square_x, red_square_y):
         self.grid = grid
