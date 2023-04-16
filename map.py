@@ -7,7 +7,7 @@ from tkinter import ttk
 class Grid:
     #
     #
-    def __init__(self, width, height, square_size, window):
+    def __init__(self, width, height, square_size, window, PurplePoint, PinkPoint):
         self.width = width
         self.height = height
         self.square_size = square_size
@@ -29,6 +29,7 @@ class Grid:
         self.battery_table.insert('', 'end', values=('PinkPoint', PinkPoint(self, 15, 15).battery.get_energy_level()))
         
         self.battery_table.pack(side=tk.RIGHT, padx=10, pady=10)
+        PurplePoint.move(self.purple_point, 1, 0,)
     #
     #     
     def draw_square(self, x, y, color):
@@ -57,7 +58,7 @@ class Grid:
                 # Ajout de carrés gris pour le reste de la grille
                 else:
                     self.canvas.create_rectangle(x*self.square_size, y*self.square_size, (x+1)*self.square_size, (y+1)*self.square_size, fill="gray")
-        purple_point.move(1,0)
+        
 
 #
 #
