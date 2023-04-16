@@ -1,20 +1,19 @@
+from battery import Battery
+import random
 
 class PurplePoint:
-    def __init__(self, grid, blue_square_x, blue_square_y):
-        self.grid = grid
-        self.x = blue_square_x
-        self.y = blue_square_y
-        self.color = "purple"
-        self.draw()
+    def __init__(self, canvas, battery):
+        self.canvas = canvas
+        self.battery = Battery(50)
+        self.shape = self.canvas.create_oval(10, 10, 30, 30, fill="purple")
+        self.x = random.randint(0, 400)
+        self.y = random.randint(0, 400)
 
     def move(self, dx, dy):
-        new_x = self.x + dx
-        new_y = self.y + dy
-        if self.grid.is_valid(new_x, new_y):
-            self.erase()
-            self.x = new_x
-            self.y = new_y
-            self.draw()
+        self.x += dx
+        self.y += dy
+        self.canvas.move(self.shape, dx, dy)
+        self.battery.use_battery(1)
 
     def draw(self):
         self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
@@ -24,22 +23,21 @@ class PurplePoint:
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
             (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="blue")
 
+
 class PinkPoint:
-    def __init__(self, grid, red_square_x, red_square_y):
-        self.grid = grid
-        self.x = red_square_x
-        self.y = red_square_y
-        self.color = "pink"
-        self.draw()
+    def __init__(self, canvas, battery):
+        self.canvas = canvas
+        self.battery = Battery(50)
+        self.shape = self.canvas.create_oval(10, 10, 30, 30, fill="pink")
+        self.x = random.randint(0, 400)
+        self.y = random.randint(0, 400)
 
     def move(self, dx, dy):
-        new_x = self.x + dx
-        new_y = self.y + dy
-        if self.grid.is_valid(new_x, new_y):
-            self.erase()
-            self.x = new_x
-            self.y = new_y
-            self.draw()
+        self.x += dx
+        self.y += dy
+        self.canvas.move(self.shape, dx, dy)
+        self.battery.use_battery(1)
+
 
     def draw(self):
         self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
@@ -48,3 +46,5 @@ class PinkPoint:
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
             (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="red")
+
+
