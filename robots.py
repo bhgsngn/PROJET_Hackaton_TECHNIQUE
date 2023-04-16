@@ -9,6 +9,7 @@ class PurplePoint:
         self.x = blue_square_x
         self.y = blue_square_y
         self.draw()
+        self.charge_battery()
 
     def move(self, dx, dy):
         self.x += dx
@@ -23,6 +24,13 @@ class PurplePoint:
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
             (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="blue")
+        
+    def charge_battery(self):
+        if self.grid.grid[self.x][self.y] == 2:
+            # Si la case sur laquelle se trouve le point violet est une case jaune,
+            # la batterie est rechargée de 20 unités
+            self.battery.energy = min(self.battery.energy + 20, 50)
+            print("Batterie rechargée. Niveau d'énergie actuel :", self.battery.get_energy_level())
 
 
 class PinkPoint:
@@ -40,6 +48,7 @@ class PinkPoint:
         self.grid.canvas.move(self.shape, dx*self.grid.square_size, dy*self.grid.square_size)
         self.battery.use_battery(1)
         self.draw()
+        self.charge_battery()
 
     def draw(self):
         self.grid.canvas.create_oval(self.x * self.grid.square_size + 2, self.y * self.grid.square_size + 2, 
@@ -48,3 +57,10 @@ class PinkPoint:
     def erase(self):
         self.grid.canvas.create_rectangle(self.x * self.grid.square_size, self.y * self.grid.square_size, 
             (self.x+1) * self.grid.square_size, (self.y+1) * self.grid.square_size, fill="red")
+        
+    def charge_battery(self):
+        if self.grid.grid[self.x][self.y] == 2:
+            # Si la case sur laquelle se trouve le point violet est une case jaune,
+            # la batterie est rechargée de 20 unités
+            self.battery.energy = min(self.battery.energy + 20, 50)
+            print("Batterie rechargée. Niveau d'énergie actuel :", self.battery.get_energy_level())
