@@ -12,7 +12,11 @@ class PurplePoint:
         self.y = blue_square_y
         self.draw()
         self.charge_battery()
+    #
+    #
 
+    #
+    #
     def move(self, dx, dy):
         self.x += dx
         self.y += dy
